@@ -16,6 +16,7 @@ public class Fruit : MonoBehaviour
             Destroy(collision.gameObject);
             
             manager.SpawnFruit(index, gameObject.transform.position);
+            manager.AddScore(index+1);
         }
     }
 }

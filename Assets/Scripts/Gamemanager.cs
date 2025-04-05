@@ -1,11 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] fruits;
+    
+    public TMP_Text scoreText;
+    public TMP_Text watermelonText;
+    
     private int count = 0;
+    private int count1 = 0;
+    private int score = 0;
+    private int watermelon = 0;
+
+    void Start()
+    {
+        score = 0;
+        watermelon = 0;
+        scoreText.text = score.ToString();
+        watermelonText.text = watermelon.ToString();
+    }
     private void Update()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -26,6 +42,25 @@ public class GameManager : MonoBehaviour
         {
             SpawnNewFruit(index + 1, position);
             count = 0;
+        }
+    }
+
+    public void AddScore(int index)
+    {
+        count1++;
+
+        if (count1 == 2)
+        {
+            score += index;
+            scoreText.text = score.ToString();
+
+            if (index == 8)
+            {
+                watermelon++;
+                watermelonText.text = watermelon.ToString();
+            }
+
+            count1 = 0;
         }
     }
 
