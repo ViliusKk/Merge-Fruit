@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,11 +10,14 @@ public class GameManager : MonoBehaviour
 
     public AudioSource hitSound;
     public AudioSource popSound;
+
     
     private int count = 0;
     private int count1 = 0;
     private int score = 0;
     private int watermelon = 0;
+    private Vector3 offset;
+    private float timer = 1f;
 
     void Start()
     {
@@ -24,17 +25,20 @@ public class GameManager : MonoBehaviour
         watermelon = 0;
         scoreText.text = score.ToString();
         watermelonText.text = watermelon.ToString();
+        offset = new Vector3(0, 0, 10);
     }
     private void Update()
     {
+        timer += Time.deltaTime;
+        
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.y = 3;
-        Vector3 offset = new Vector3(0, 0, 10);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && timer >= 0.5f)
         {
             SpawnNewFruit(Random.Range(0, 3), mousePos + offset);
             popSound.Play();
+            timer = 0f;
         }
     }
 
