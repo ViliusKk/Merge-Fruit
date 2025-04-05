@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     
     public TMP_Text scoreText;
     public TMP_Text watermelonText;
+
+    public AudioSource hitSound;
+    public AudioSource popSound;
     
     private int count = 0;
     private int count1 = 0;
@@ -31,11 +34,13 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SpawnNewFruit(Random.Range(0, 3), mousePos + offset);
+            popSound.Play();
         }
     }
 
     public void SpawnFruit(int index, Vector3 position)
     {
+        hitSound.Play();
         count++;
 
         if (count == 2 && index + 1 < fruits.Length)
