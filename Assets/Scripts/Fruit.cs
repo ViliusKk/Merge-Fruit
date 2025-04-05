@@ -5,16 +5,17 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     public int index = 0;
-    Gamemanager gamemanager;
+    public GameManager manager;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains(gameObject.name))
+        Fruit otherFruit = collision.gameObject.GetComponent<Fruit>();
+        if (otherFruit != null && otherFruit.index == this.index)
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
             
-            // spawn a bigger fruit
+            manager.SpawnFruit(index, gameObject.transform.position);
         }
     }
 }
