@@ -5,10 +5,6 @@ using UnityEngine;
 public class Gamemanager : MonoBehaviour
 {
     public GameObject[] fruits;
-    void Start()
-    {
-        
-    }
     void Update()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
